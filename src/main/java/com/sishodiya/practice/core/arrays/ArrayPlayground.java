@@ -1,8 +1,10 @@
 package main.java.com.sishodiya.practice.core.arrays;
 
 import java.awt.image.Kernel;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public class ArrayPlayground {
     public static void main(String[] args) {
@@ -10,6 +12,7 @@ public class ArrayPlayground {
         int[] arr = {12, 87, 5, 7, 87, 6, 4};
         int[] sorted = {4, 5, 6, 7,12,87};
         sumToTarget(arr,target1);
+        sumToTargetJ8(arr,target1);
     }
 
     //This is the program to return indecis of two number which sums to target.
@@ -26,6 +29,21 @@ public class ArrayPlayground {
                 }
             }
         }
+    }
+
+    static void sumToTargetJ8(int[] arr, int target){
+        Map<Integer,Integer> bucket = new HashMap<>();
+        IntStream.range(0, arr.length).forEach(i -> {
+            if (arr[i] < target) {
+                int complement = target - arr[i];
+                if (bucket.containsKey(complement)) {
+                    System.out.println("Indexes are " + i + "," + bucket.get(complement));
+                } else {
+                    bucket.put(arr[i], i);
+                }
+            }
+        });
+
     }
 
 }
