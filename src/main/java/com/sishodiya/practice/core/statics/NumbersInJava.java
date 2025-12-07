@@ -1,14 +1,33 @@
 package main.java.com.sishodiya.practice.core.statics;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Arrays;
+import java.util.List;
 
 public class NumbersInJava {
     public static void main(String[] args) {
         //Method to show the number ranges
-        showNumberRanges();
+//        showNumberRanges();
 
         //Test numbers
         testNumbers();
+
+        //sum big decimals
+//        sumBigDecimals();
+
+    }
+
+    static BigDecimal getBigDecimal(String str){
+        return new BigDecimal(str);
+    }
+
+    static void sumBigDecimals(){
+        //[1000.50, 2500.75, 325.25]
+        List<BigDecimal> balances = Arrays.asList(getBigDecimal("1000.50"),getBigDecimal("2500.75"),getBigDecimal("325.25"));
+
+        BigDecimal finalResult =  balances.stream().reduce(BigDecimal::add).get();
+        System.out.println("Final Result = "+ finalResult);
     }
 
     //note
@@ -20,16 +39,10 @@ public class NumbersInJava {
 //    Division	amount1.divide(amount2, 2, RoundingMode.HALF_UP)
 
     static void testNumbers(){
-//        System.out.println(0.1 + 0.2);
-        BigDecimal b1 = new BigDecimal(0.1);
-        BigDecimal b2 = new BigDecimal(0.2);
-        BigDecimal result = b1.add(b2);
-//        System.out.println(result);
-//        System.out.println(10.2 + 5.75);
-        BigDecimal amount1 = new BigDecimal("0.1");
-        BigDecimal amount2 = new BigDecimal("0.2");
-        BigDecimal result1 = amount1.add(amount2);
-        System.out.println("Total: " + result1); // Output: 16.00
+        BigDecimal inr = new BigDecimal("15000");
+        BigDecimal rate = new BigDecimal("87.45");
+        BigDecimal usd = inr.divide(rate, 2, RoundingMode.HALF_UP);
+        System.out.println(usd);
     }
 
 
